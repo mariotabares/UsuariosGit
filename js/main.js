@@ -23,7 +23,7 @@ const app = Vue.createApp({
                 if (!response.ok) throw new Error("User no fount")
                 const data = await response.json()
                 console.log(data)
-                this.result = true
+                this.result = data
             } catch (error) {
                 this.error = error
             } finally {
