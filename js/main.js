@@ -10,6 +10,7 @@ const app = Vue.createApp({
             search: null,
             result: null,
             error: null,
+            favorites: new Map()
         }
     },
     //METODOS
@@ -29,6 +30,9 @@ const app = Vue.createApp({
             } finally {
                 this.search = null
             }
+        },
+        addFavorite(){
+            this.favorites.set(this.result.id,this.result)
         }
     }
 })
