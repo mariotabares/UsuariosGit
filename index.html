@@ -2,11 +2,14 @@
 <html lang="en">
 
 <head>
+    <!-- Metadatos -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub search</title>
+    <!-- Estilos css -->
     <link rel="stylesheet" href="css/main.css">
+    <!-- estancia para usar vue sin herramientas sin empaquetado-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -22,26 +25,32 @@
 
             <!-- Search -->
             <form class="search" v-on:submit.prevent="doSearch">
+                <!-- model es una funcion reactiva que permite modificar el valor de la variable search -->
                 <input v-model="search" type="text" class="search__input" required placeholder="Search GitHub users">
                 <input type="submit" class="search__submit" value="Search">
             </form>
 
             <!-- Result -->
             <div class="result" v-if="result">
-                <a href="#" class="result__toggle-favorite" @click="addFavorite">Add Faforitos </a>
+                
+                <a v-if="!isFavorite" href="#" class="result__toggle-favorite" @click="addFavorite">Add Faforitos </a>
+                <a v-else href="#" class="result__toggle-favorite" @click="removeFavorite">Remove Faforitos </a>
                 <h2 class="result__name">{{result.name}}</h2>
                 <img v-bind:src="result.avatar_url" :alt="result.name" class="result__avatar">
                 <p class="resul__bio">{{result.bio}} <br>
                     <a :href="result.blog" target="_blank" class="result__blog">{{result.blog}}</a>
                 </p> 
             </div>
+
             <!-- Error -->
             <div class="result__error" v-if="error">{{error}}</div>
         </article>
     </div>
+    <!--Instancia de archivo pricipal javascript -->
     <script src="js/main.js"></script>
-    <script>
-        const mountedApp = app.mount("#app")
+<!-- Instancia de vue(hace funcionar la reactividad de la funcion en js) -->
+   <script>  
+   const mountedApp = app.mount("#app")
     </script>
 </body>
 
