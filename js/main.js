@@ -15,11 +15,26 @@ const app = Vue.createApp({
             favorites: new Map()
         }
     },
+    //FUNCIONES DE CICLO DE VIDA
+    //Funcion para cargar los datos del local storage
+    created(){
+        const savedFavorites = JSON.parse(window.localStorage.getItem("favorites"))
+        if(savedFavorites.length){
+            const favorites= new Map(savedFavorites.map(favorite=>[favorite.id,favorite]))
+            this.favorites=favorites
+        }
+        
+    },
     //FUNCIONES COMPUTADAS
     computed: {
         //Funcion para mostrar el resultado de la busqueda
         isFavorite() {
             return this.favorites.has(this.result && this.result.id)
+        }
+        ,
+        //Funcion para mostrar los favoritos
+        allFavorites() {
+            return Array.from(this.favorites.values())
         }
     },
     //METODOS
@@ -46,9 +61,19 @@ const app = Vue.createApp({
         },
         addFavorite(){
             this.favorites.set(this.result.id,this.result)
+            this.updateStorage()
         },
         removeFavorite(){
             this.favorites.delete(this.result.id)
+            this.updateStorage()
+        },
+        //mostrar favoritos ya guardados 
+        showFavorite(favorite){
+            this.result=favorite
+        },
+        // funcion persistencia de datos en el local storage
+        updateStorage(){
+            window.localStorage.setItem("favorites",JSON.stringify(this.allFavorites))
         }
     }
 })
