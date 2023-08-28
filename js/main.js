@@ -19,7 +19,7 @@ const app = Vue.createApp({
     //Funcion para cargar los datos del local storage
     created(){
         const savedFavorites = JSON.parse(window.localStorage.getItem("favorites"))
-        if(savedFavorites.length){
+        if( savedFavorites?.length){
             const favorites= new Map(savedFavorites.map(favorite=>[favorite.id,favorite]))
             this.favorites=favorites
         }
