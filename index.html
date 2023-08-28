@@ -41,16 +41,14 @@
 
             <!-- Result -->
            <Transition>
-            <div class="result" v-if="result">
-                
-                <a v-if="!isFavorite" href="#" class="result__toggle-favorite" @click="addFavorite">Add Faforitos </a>
-                <a v-else href="#" class="result__toggle-favorite" @click="removeFavorite">Remove Faforitos </a>
-                <h2 class="result__name">{{result.name}}</h2>
-                <img v-bind:src="result.avatar_url" :alt="result.name" class="result__avatar">
-                <p class="resul__bio">{{result.bio}} <br>
-                    <a :href="result.blog" target="_blank" class="result__blog">{{result.blog}}</a>
-                </p> 
-            </div>
+                <app-profile 
+                     v-if="result"
+                    :result="result"
+        :is-favorite="isFavorite"
+        @add-favorite="addFavorite"
+        @remove-favorite="removeFavorite" />
+</Transition>
+             
            </Transition> 
           
 
@@ -60,6 +58,8 @@
     </div>
     <!--Instancia de archivo pricipal javascript -->
     <script src="js/main.js"></script>
+    <!-- Instancia de archivo de transicion -->
+    <script src="js/components/AppProfile.js"></script>
 <!-- Instancia de vue(hace funcionar la reactividad de la funcion en js) -->
    <script>  
    const mountedApp = app.mount("#app")

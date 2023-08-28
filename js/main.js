@@ -78,7 +78,8 @@ const app = Vue.createApp({
                 const data = await response.json()
                 console.log(data)
                 this.result = data
-                this.foundInFavorites.lastRequestTime = Date.now()
+                foundInFavorites.lastRequestTime = Date.now()
+                
 
             } catch (error) {
                 this.error = error
@@ -87,7 +88,6 @@ const app = Vue.createApp({
             }
         },
         addFavorite(){
-
             this.result.lastRequestTime=Date.now()
             this.favorites.set(this.result.login,this.result)
             this.updateStorage()
