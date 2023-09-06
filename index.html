@@ -17,13 +17,14 @@
     <div id="app">
         <!-- Favorites -->
         <div class="favorites">
-          <transition-group name="list">
-            <div class="favorite"
-            :class="{'favorite--selected':checkFavorite(favorite.login)}"
-             v-for="favorite in allFavorites" :key="favorite.id">
-                <a @click.prevent="showFavorite(favorite)" href="#" target="_blank">
-                    <img :src="favorite.avatar_url" :alt="favorite.name" class="favorite__avatar">
-                </a>
+          <transition-group name="list"> 
+            <div 
+            class="favorite"
+            :class="{'favorite--selected': checkFavorite(favorite.login)}"
+            v-for="favorite in allFavorites" :key="favorite.id">
+            <a @click.prevent="showFavorite(favorite)" href="#" target="_blank">
+                <img :src="favorite.avatar_url" :alt="favorite.name" class="favorite__avatar">
+            </a>
             </div>
           </transition-group>
         </div>
@@ -44,14 +45,11 @@
                 <app-profile 
                      v-if="result"
                     :result="result"
-        :is-favorite="isFavorite"
-        @add-favorite="addFavorite"
-        @remove-favorite="removeFavorite" />
-</Transition>
-             
-           </Transition> 
+                    :is-favorite="isFavorite"
+                    @add-favorite="addFavorite"
+                    @remove-favorite="removeFavorite" />
+            </Transition>
           
-
             <!-- Error -->
             <div class="result__error" v-if="error">{{error}}</div>
         </article>
